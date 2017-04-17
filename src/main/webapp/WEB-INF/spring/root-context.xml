@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- spring jdbc 추가 이후 property 드라이버클래스, url, username, password 추가 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	<property name="url" value="jdbc:mysql://localhost:3306/sample_db?useSSL=false"></property>
+	<property name="username" value="bit92"></property>
+	<property name="password" value="bit92"></property>
+	</bean>
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<bean id="english" class="org.backtracker.service.EnglishHello"></bean>
+	
+	<bean id="koreanMsg" class="org.backtracker.service.KoreanMsg"></bean>
+	
+	<bean id="korean" class="org.backtracker.service.KoreanHello">
+	<!-- 생성자를 사용할 경우 잡아 주어야 한다. -->
+	<!-- KoreanHello에 koreanMsg를 주입 한다. -->
+	<constructor-arg ref="koreanMsg">
+	</constructor-arg>
+	</bean>
+		
+</beans>
